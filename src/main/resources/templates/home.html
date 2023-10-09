@@ -32,7 +32,7 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$.getJSON('http://localhost:8081/api/v1/employees', function(json) {
+			$.getJSON('[[${appURI}]]/employees', function(json) {
 				var tr=[];
 				for (var i = 0; i < json.length; i++) {
 					tr.push('<tr>');
@@ -61,7 +61,7 @@
 				$.ajax({
 					type: "POST",
 					contentType: "application/json; charset=utf-8",
-					url: "http://localhost:8081/api/v1/employees",
+					url: "[[${appURI}]]/employees",
 					data: JSON.stringify({'firstName': firstName, 'lastName': lastName, 'emailId': emailId}),
 					cache: false,
 					success: function(result) {
@@ -80,7 +80,7 @@
 					var parent = $(this).parent().parent();
 					$.ajax({
 						type: "DELETE",
-						url: "http://localhost:8081/api/v1/employees/" + id,
+						url: "[[${appURI}]]/employees/" + id,
 						cache: false,
 						success: function() {
 							parent.fadeOut('slow', function() {
@@ -126,7 +126,7 @@
 				$.ajax({
 					type: "PUT",
 					contentType: "application/json; charset=utf-8",
-					url: "http://localhost:8081/api/v1/employees/"+id.html(),
+					url: "[[${appURI}]]/employees/"+id.html(),
 					data: JSON.stringify({'id' : id.html(), 'firstName' : firstName.children("input[type=text]").val(), 'lastName' : lastName.children("input[type=text]").val(), 'emailId' : emailId.children("input[type=text]").val()}),
 					cache: false,
 					success: function() {
@@ -145,7 +145,8 @@
 	</script>
 </head>
 <body>
-
+	
+	<p>Welcome to <span th:text="${appName}">Our App</span></p>
 	<h2>PHP REST API MySQL AJAX jQuery CRUD</h2>
 	
 	<h3>Add a New Company</h3>
